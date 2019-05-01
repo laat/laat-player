@@ -1,1 +1,1 @@
-export * from "./jsx/LaatPlayer";
+export * from "./react/LaatPlayer";

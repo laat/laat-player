@@ -24,7 +24,7 @@ export type ElementAttributeChanged = {
   newValue: string | null;
 };
 
-export type PlayerElementEvent =
+export type PlayerEvent =
   | ElementConstructor
   | ElementConnected
   | ElementDisconnected
@@ -33,17 +33,16 @@ export type PlayerElementEvent =
   | PauseAction;
 
 export const is = {
-  ElementConstructor: (evt: PlayerElementEvent): evt is ElementConstructor =>
+  ElementConstructor: (evt: PlayerEvent): evt is ElementConstructor =>
     evt.type === "constructor",
-  ElementConnected: (evt: PlayerElementEvent): evt is ElementConnected =>
+  ElementConnected: (evt: PlayerEvent): evt is ElementConnected =>
     evt.type === "connected",
-  ElementDisconnected: (evt: PlayerElementEvent): evt is ElementDisconnected =>
+  ElementDisconnected: (evt: PlayerEvent): evt is ElementDisconnected =>
     evt.type === "disconnected",
-  ElementAttributeChanged: (
-    evt: PlayerElementEvent
-  ): evt is ElementAttributeChanged => evt.type === "attributeChanged",
-  PlayAction: (evt: PlayerElementEvent): evt is PlayAction =>
+  ElementAttributeChanged: (evt: PlayerEvent): evt is ElementAttributeChanged =>
+    evt.type === "attributeChanged",
+  PlayAction: (evt: PlayerEvent): evt is PlayAction =>
     evt.type === "play.action",
-  PauseAction: (evt: PlayerElementEvent): evt is PauseAction =>
+  PauseAction: (evt: PlayerEvent): evt is PauseAction =>
     evt.type === "pause.action"
 };

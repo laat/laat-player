@@ -3,12 +3,12 @@ import { map, filter } from "rxjs/operators";
 import { ObjectFromEntries } from "../helpers/typescript";
 import { hlsjsPlayer } from "../video.hlsjs";
 import { toCustomEvent } from "./customEvents";
-import { AttributeName, PlayerElementEvent } from "./LaatPlayerEvent";
+import { AttributeName, PlayerEvent } from "../PlayerEvent";
 import { is } from "../VideoEvent";
 
 export class LaatPlayerElement extends HTMLElement {
   static observedAttributes: AttributeName[] = ["src", "muted", "autoplay"];
-  private _playerSubject = new Subject<PlayerElementEvent>();
+  private _playerSubject = new Subject<PlayerEvent>();
   private _player$ = this._playerSubject.asObservable();
   private _video$ = hlsjsPlayer(this._player$);
 
@@ -32,7 +32,7 @@ export class LaatPlayerElement extends HTMLElement {
     this._player$.subscribe(c => console.log("_player$", c));
     this._video$
       .pipe(filter(e => !is.timeUpdate(e)))
-      .subscribe(() => console.log("_video$"));
+      .subscribe(e => console.log("_video2$", e));
   }
 
   connectedCallback() {

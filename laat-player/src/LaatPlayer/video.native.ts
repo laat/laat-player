@@ -1,9 +1,9 @@
 import { fromEvent, merge, Observable } from "rxjs";
 import { filter, map } from "rxjs/operators";
-import { is, PlayerElementEvent } from "./customElement";
 import { as } from "./VideoEvent";
+import { is, PlayerEvent } from "./PlayerEvent";
 
-export const nativePlayer = (player$: Observable<PlayerElementEvent>) => {
+export const nativePlayer = (player$: Observable<PlayerEvent>) => {
   const video = document.createElement("video");
   const setAttribute = makeSetAttribute(video);
   video.style.width = "100%";

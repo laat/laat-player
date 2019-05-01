@@ -2,10 +2,10 @@ import Hls from "hls.js";
 import { fromEvent, merge, Observable, Subject } from "rxjs";
 import { filter, map, skipUntil, distinctUntilChanged } from "rxjs/operators";
 import { fromHlsjs } from "./helpers/fromHlsjs";
-import { is, PlayerElementEvent } from "./customElement/LaatPlayerEvent";
+import { is, PlayerEvent } from "./PlayerEvent";
 import { as, VideoEvent } from "./VideoEvent";
 
-export const hlsjsPlayer = (player$: Observable<PlayerElementEvent>) => {
+export const hlsjsPlayer = (player$: Observable<PlayerEvent>) => {
   const hls = new Hls({ enableWorker: false });
   const video = document.createElement("video");
   const videoSubject = new Subject<VideoEvent>();
@@ -44,6 +44,7 @@ const makeSetVideoAttribute = (
     if (opts.newValue != null) {
       hls.attachMedia(video);
       hls.loadSource(opts.newValue);
+      // xxx triggered twice!
       video.addEventListener(
         "canplay",
         () => videoSubject.next(as.loadedMedia()),
