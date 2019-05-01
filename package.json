@@ -1,0 +1,7 @@
+{
+  "name": "rxjs-player",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sigurd Fosseng <sigurd@fosseng.net>",
+  "license": "MIT"
+}
